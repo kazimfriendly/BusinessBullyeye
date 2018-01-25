@@ -1,0 +1,39 @@
+hello,
+Hope you doing good i have just gone through your project attachment. In my opinion it will take maximum 1 month. I have over 7 years of experience in php web development. Your choice for MVC framework is good but i m big fan of Yii framework. it gives both secure and fast-track develoment. I am using it from around last 4 years.
+
+Below you see detailed list of tasks and their estimate (hours/days/$).
+1.	Register (2 days / $20)
+2.	Login ( 2 day / $10)
+3.	View/Update user profile ( 1 day / $10)
+4.	Project overview (3 days / $20)
+5.	Project details (5 days / $30)
+6.	Project plans (5 days / $30)
+7.	Project status records (3 days / $20)
+8.	Project treeview (5 days / $30)
+9.	Add new project (3 days / $20)
+
+Note: I am writing estimation keeping Yii framework in mind. I usually work 6 hours a day 5 days a weak.
+
+
+-------------------------------------------------------------------------------------------------------------
+
+
+hello,
+Hope you doing good. I am a experiece web developer and  have over 7 years of experience in Web development.  I have been working on MVC from last 5 years i started from symphony then worked on codeigniter, kohana and now a days working on Yii and ASP.NET MVC. 
+I have experience on both c# and php languages and with them i am also very good in client side languages like javascript, jquery, ajax and angular js.
+when come to database handling i have used several time MySql for php and SQL server with c#,asp.net.
+
+i am independent freelancer and I usually work 6 hours a day 5 days a weak. 
+
+Looking forward for your positive response.
+
+Sadaf Siddiqui
+
+-------------------------------------------------------------------------
+
+I have been developing websites from last 7 years. I started from asp classic then move to php and then i did some work on asp.net. PhP is mine all time favorite language. I did many projects on it. I have worked on many opensource projects like symfony, kohana , codeigniter, laravel and Yii.  I also worked on wordpress framework and developed many custom themes and plugins.  following are some of my recent project detail.   Properties management software  i recently develop a property management system for a realestate business.I used Yii,bootstrap,ajax and jquery there. It also include google map and video/image uploading, user profile manager, role base admin panel and user panels.   Content Manager (http://www.businessjot.com/) Another website is full feature content manager which i developed again on Yii framework. It also includes dynamic menu manager, site map creator, role base admin panel, company portfolio managing panel, search engine friendly pages having custom url, meta tags and descriptions. It allow user to upload any type of media and share it. A news management system , order form with paypal integration and blog are its plus points.   Online Trading System  I develop web interface for online trading system with a team of 6 members. There we use webservices to bring data from dedicated organizations servers and form user interface we use smart client dynamic user experience script. I also develop a shopping cart there with Yii framework.   Online Surveys Creating website (http://www.surveycrest.com/) I develop it on Kohana framework. it include multi level survey form, mass mailing and sharing on social media, result evaluation reporting. With role base admin panel. I also worked on optional user login like facebook login and google login.   A Fashion Magazine website A small fashion recommendations website develop on codeigniter. I develop website with seo friendly pages, Q & A section with admin panel.  Global Adress and Identification System (GLAD ID )  I was the senior member of a big team. we develop it on organisational custom develop php framework which was using HMVC coding pattern.   Competition Base Website.(http://www.talentidols.com/)  I was the member of big team. wed develop from competition creation to result evaluation and winner announcement. we develop it on codeigniter HMVC .   Student Tracking and Identification System ( STRIDES )  we develop it on codeigniter. i was part of small team. We develop two communicating softwares one for school and other is for tracking company by developing the REST Api .   I think its enough detail to know my expertise.  Looking forward to hearing form you soon.  High Regards, Sadaf
+Web Developer
+
+
+
+  

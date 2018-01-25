@@ -1,0 +1,18 @@
+body{
+	background: #c6c6c6;
+}
+.navbar-default {
+	height: 100px;
+}
+.navbar-brand>img {
+    margin-top: -15px;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #fe8e28;
+    border-color: #fe8e28;
+}
+.btn-link{
+	color: #fe8e28;
+    font-weight: bold;
+}
