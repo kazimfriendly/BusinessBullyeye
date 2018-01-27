@@ -64,8 +64,6 @@ Route::group(['prefix' => 'packages','middleware' => 'auth'], function () {
     Route::get('/assign_coach/{package_id}','PackageController@assignCoachForm');
     Route::post('/assign_coach','PackageController@assignCoach');
     Route::get('/view/{package_id}','PackageController@view');
-    
-
 });
 
 Route::group(['prefix' => 'clients','middleware' => 'auth'], function () {
@@ -76,8 +74,6 @@ Route::group(['prefix' => 'clients','middleware' => 'auth'], function () {
     Route::put('{package_id}','ClientController@update');
 //    Route::get('{package_id}','ClientController@show');
     Route::delete('{client_id}','ClientController@destroy');
-    
-    
 });
 
 Route::group(['prefix' => 'coaches','middleware' => 'auth'], function () {

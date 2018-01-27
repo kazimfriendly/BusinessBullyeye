@@ -60,7 +60,11 @@
 
                                             {{$response->getTime($response->response_id)}}</h5>
                                     </div>
-                                    <p>{!!$response->getContent($response->response_id)!!}</p>  
+                                    <div id="comment_content_p">{!! $response->getContent($response->response_id) !!}</div>
+                                    <div class="comment-action">
+
+                                    <button data-state="edit" id="edit" class="comment-edit">edit</button>
+                                    </div>
                                 </div>
 
                             </li>
@@ -80,7 +84,7 @@
                             <form class="form-horizontal" id="responseBox_{{$question->id}}" role="form" method="POST"  action="{{ url('assigned/'.$assignment->module_id.'/'.$module->id) }}">
                                 {{ csrf_field() }}
                                 <div class="res">Response:</div>
-                                <textarea class="form-control input-lg" name="content" type="text"></textarea>                        
+                                <textarea class="form-control input-lg" name="content" id="rcontent" type="text" id="richtextcontent"></textarea>                        
                                 <input type="hidden" name="assignment_id" value="{{$assignment->id}}">
                                 <input type="hidden" name="question_id" value="{{$question->id}}">
                                 <input type="hidden" name="responseby" value="{{Auth::user()->id}}">                                
@@ -503,9 +507,10 @@ $(document).on('click', '#save-response', function (e) {
         }
     });
     e.preventDefault();
-
-
-//    console.log(formData);
+    // console.log($("#responseBox_"+quid+" textarea").val().replace(/\r\n/gi,"</br>"));
+    // var content ={ content : $("#responseBox_"+quid+" textarea").val().replace(/\r\n/gi,"</br>")};
+    //  var content =$("#responseBox_"+quid+" textarea").val().replace(/\r\n/gi,"</br>");
+    // console.log($("#responseBox_" + quid).find('input,textarea').not('[name="content"]').serialize());
     $.ajax({
         type: "POST",
         url: $("#responseBox_" + quid).attr('action'),
@@ -658,6 +663,21 @@ $(document).on('click', '#save-response', function (e) {
     .post .post-footer .comments-list .comment .comment-body {
         margin-left: 50px;
     }
+    .post .post-footer .comments-list .comment .comment-action {
+        text-align: end;
+    }
+
+    .post .post-footer .comments-list .comment .comment-action .comment-edit {
+        background: #5ad46e;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-decoration:unset;
+    }
+    .post .post-footer .comments-list .comment .comment-action .comment-edit:hover {
+        background: #4db45d;
+    }
+
     .post .post-footer .comments-list .comment > .comments-list {
         margin-left: 50px;
     }
