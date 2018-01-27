@@ -1,2 +1,0 @@
-# BusinessBullyeye
-Laravel Project
