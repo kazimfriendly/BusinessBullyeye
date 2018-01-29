@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use Validator;
 class ProfileController extends Controller {
 
     /**
@@ -66,11 +66,19 @@ class ProfileController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $user_id) {
-        $msg = "Password and Confirm Password should be same.";
+
+        $msg ='';
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' =>'required|email|unique:users,email,'.$user_id,
+        ]);
+        if (!$validator->fails()) {
+            $msg = "Password and Confirm Password should be same.";
         $user = User::find($user_id);
         if ($request->type == 'detail') {
             $user->name = $request->name;
             $user->description = $request->description;
+            $user->email = $request->email;
             $msg = "Profile Information Updated";
         } elseif ($request->type == 'cpasword') {
             if ($request->password == $request->password_confirmation) {
@@ -84,8 +92,8 @@ class ProfileController extends Controller {
             $user->avatar = $path;
             $msg = 'Avatar updated successfully.';
         }
-        $user->save();
-        return back()->with('success', $msg);
+        $user->save();}
+        return back()->with('success', $msg)->withErrors($validator)->withInput();
     }
 
     /**

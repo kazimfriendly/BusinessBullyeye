@@ -90,6 +90,7 @@ Route::group(['prefix' => 'assigned','middleware' => 'auth'], function () {
     Route::post('/sendtocoach/{assigned_id}', 'AssignmentController@sendtocoach');
     Route::post('/savecontinue/{assigned_id}', 'AssignmentController@savecontinue');
     Route::get('/{assigned_id}', 'AssignmentController@show');
+    Route::post('/update/{assigned_id}/', 'AssignmentController@update');
     Route::post('/{package_id}/{module_id}', 'AssignmentController@store');
     Route::post('/update_status', 'AssignmentController@updateStatus');
    

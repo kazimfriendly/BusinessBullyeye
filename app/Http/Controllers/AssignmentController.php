@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mail\NewResponse;
-
+use App\response as Response;
 class AssignmentController extends Controller {
 
     public function show(Request $request, $assignment_id) {
@@ -178,6 +178,22 @@ class AssignmentController extends Controller {
 //        }
 //        else
 //            return back()->with('success',"There is only one module in package.");
+    }
+
+
+    /********** Assign Update answer ************/
+
+    public function update($id,Request $request){
+        $response =  Response::find($id);
+        $response->content = nl2br($request->content);
+
+        if($response->save()){
+            $data=['status'=>true];
+        }else{
+            $data=['status'=>false];
+        }
+
+        return response($data);
     }
 
 }

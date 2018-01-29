@@ -81,9 +81,6 @@
                 </table>
             </div>
 
-
-
-
         </div>
        
         @include('modals.add_client')
@@ -113,8 +110,25 @@ Packages
 
 @section('script')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<link rel="stylesheet" href="{{asset('js/plugins/multiselect/dist/css/bootstrap-multiselect.css')}}"/>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 <script src="{{asset('js/package.js')}}"></script>
-
+<script src="{{asset('js/plugins/multiselect/dist/js/bootstrap-multiselect.js')}}"></script>
 @endsection
+
+
+<style>
+
+select#package-assign-multidropdown + div .dropdown-menu {
+    position: inherit;
+    width: 100%;
+    display: block;
+}
+
+
+select#package-assign-multidropdown + div .dropdown-menu>li>a{
+    display: table;
+    width: 100%;
+}
+</style>

@@ -78,17 +78,22 @@
 
 
                     <div class="form-group{{ $errors->has('emails') ? ' has-error' : '' }}">
-                        <label for="email" class="col-md-4 control-label">E-Mail Addresses In Comma separated format</label>
+                        <!-- <label for="email" class="col-md-4 control-label">E-Mail Addresses In Comma separated format</label> -->
 
-                        <div class="col-md-6">
-                            <input id="emails" type="text" class="form-control" name="emails" value="{{ old('email') }}" required>
+                        <div class="col-md-offset-3 col-md-6">
+                            <!-- <input id="emails" type="text" class="form-control" name="emails" value="{{ old('email') }}" required> -->
+
+                            <select id="package-assign-multidropdown" multiple="multiple" name="email">
+                                @foreach ($coaches[0]->getClients($users,$collection) as $client)
+                                    <option value="{{ $client->email }}">{{$client->email}}</option>
+                                @endforeach
+                            </select>
 
 
                         </div>
                     </div>
 
-
-
+                   
 
                     <div class="frmModule-footer"></div>
                 </div>
@@ -230,7 +235,7 @@ $('#frmClient').trigger("reset");
             });
 
             var formData = {
-                emails: $('#emails').val(),
+                emails: jQuery('#package-assign-multidropdown').val(),
                 package_id: $('#package_id').val()
             };
             console.log(formData);
@@ -274,6 +279,16 @@ $('#frmClient').trigger("reset");
         $btn.button('reset');
     }, 10000);
 });
+
+
+   
+        $('#package-assign-multidropdown').multiselect({
+            buttonWidth: '400px',
+            maxHeight: 200,
+            includeSelectAllOption: true,
+        });
+
+</script>
 </script>
 @endsection
 

@@ -63,7 +63,7 @@
                                     <div id="comment_content_p">{!! $response->getContent($response->response_id) !!}</div>
                                     <div class="comment-action">
 
-                                    <button data-state="edit" id="edit" class="comment-edit">edit</button>
+                                    <button data-state="edit" id="{{$response->response_id}}" class="comment-edit">edit</button>
                                     </div>
                                 </div>
 
@@ -494,6 +494,51 @@ $(document).on('click', '#savecontinue', function (e) {
 //    return result; //you can just return c because it will be true or false
 });
 
+
+/*************** Answer update ************/
+function assign_update(e){
+    var quid = $(e).attr('id');
+    var  content_ = e.parent().parent().find("[name='content']").val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: "POST",
+        url: app.base_url+'/assigned/update/'+e.attr('id'),
+        data: {content:content_},
+        dataType: 'json',
+        success: function (data) {
+          if(data.status==true){
+            $.notify("Your response has been update successfully.","success");
+          }else if(data.status==false){
+            $.notify("Your response has been not update successfully.","error");
+          }
+        }});
+
+}
+/********************** END  ******************/
+/* div convert to textarea update answers ******/
+$("body").on("click",".comment-edit", function(){
+    var btn = jQuery(this),
+        div = btn.parent().parent().find("#comment_content_p"),
+        html,
+        isEdit = btn.attr("data-state") === "edit",
+        state  = isEdit ? "save" : "edit";
+    if (isEdit) {
+        html = "<textarea class='form-control input-lg' rows=5 name='content'>" + div.html().replace(/<br>/gi,"\n") + "</textarea>";
+    } else {
+        assign_update(btn);
+        html = div.find("textarea").val().replace(/\n/gi,"<br>");      
+    }
+    div.html(html);
+    btn.attr("data-state", state).text(state);   
+});
+/********************** END  ******************/
+
+
+
 $(document).on('click', '#save-response', function (e) {
     var quid = $(this).val();
     var $btn = $(this);
@@ -533,7 +578,10 @@ $(document).on('click', '#save-response', function (e) {
                     + '<h4 class="user">' + data.user.name + '</h4>'
                     + '<h5 class="time"> ' + data.response.created_at + '</h5>'
                     + '</div>'
-                    + '<p>' + data.response.content + '</p>  '
+                    + '<div id="comment_content_p">' + data.response.content + '</div>  '
+                    + '<div class="comment-action">'
+                    + '<button data-state="edit" id="'+data.response.id+'" class="comment-edit">edit</button>'
+                    + '</div>'
                     + '</div>'
                     + '</li>';
 
@@ -673,6 +721,7 @@ $(document).on('click', '#save-response', function (e) {
         padding: 5px 10px;
         border-radius: 5px;
         text-decoration:unset;
+        text-transform: capitalize;
     }
     .post .post-footer .comments-list .comment .comment-action .comment-edit:hover {
         background: #4db45d;

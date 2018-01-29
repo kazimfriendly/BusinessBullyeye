@@ -104,8 +104,8 @@ class ClientController extends Controller {
 
         $pack_id = $request->package_id;
         $emails = $request->emails;
-        $emails = preg_replace('/\s+/', '', $emails);
-        $users = \App\User::whereIn('email', explode(",", $emails))->get();
+        // $emails = preg_replace('/\s+/', '', $emails);
+        $users = \App\User::whereIn('email', array_values($emails))->get();
         $package = \App\package::find($request->package_id);
 
         $clients = [];

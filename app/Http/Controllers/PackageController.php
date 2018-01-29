@@ -6,6 +6,7 @@ use App\package;
 use Illuminate\Http\Request;
 use App\module;
 use App\Mail\NewPackageAdded;
+use Auth;
 
 class PackageController extends Controller {
 
@@ -15,12 +16,33 @@ class PackageController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
+        
         $packages = package::owner()->active()->get();
         $epackage = new package();
         $live_modules = module::where('is_live', true)->author()->get();
 
+        //$assigns = \App\assign::where('user_id',Auth::id())->distinct()->get();
+        // foreach($assigns as $assign){
+        //     $clients = \App\assign::where('coache_id',$assign->id)->distinct()->get();
+
+        //     foreach($clients as $client) {
+        //         $users = \App\User::where('id',$client->user_id)->distinct()->get();
+        //         foreach(  $users as $user){
+        //             echo   $user->email.'<br>';
+        //         }
+        //     }
+        // }
+        $collection = \App\assign::all();
+        $users = \App\User::all();
+        $coaches = \App\assignment::coach()->get()->unique('user_id');
+        
+
+
+        
+
         return view('package.index')->with('packages', $packages)->with('epackage', $epackage)
-                        ->with('live_modules', $live_modules);
+                        ->with('live_modules', $live_modules)->with('collection', $collection)
+                        ->with('users', $users)->with("coaches", $coaches);;
     }
 
     /**
