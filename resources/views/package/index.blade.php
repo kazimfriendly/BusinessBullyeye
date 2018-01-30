@@ -31,6 +31,7 @@
                             <td>{{$package->price}}</td>
                             <td id="clients_{{$package->id}}">{{$package->linked_clients->unique('user_id')->count() }}</td>
                             <td>
+                        
                                 @php
                                     $checked = ($package->status == 1)? 'checked':'';
                                 @endphp
