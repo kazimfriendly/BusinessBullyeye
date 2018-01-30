@@ -32,17 +32,14 @@ class PackageController extends Controller {
         //         }
         //     }
         // }
-        $collection = \App\assign::all();
-        $users = \App\User::all();
-        $coaches = \App\assignment::coach()->get()->unique('user_id');
+   
         
 
 
         
 
         return view('package.index')->with('packages', $packages)->with('epackage', $epackage)
-                        ->with('live_modules', $live_modules)->with('collection', $collection)
-                        ->with('users', $users)->with("coaches", $coaches);;
+                        ->with('live_modules', $live_modules);
     }
 
     /**
@@ -165,8 +162,21 @@ class PackageController extends Controller {
     }
 
     public function showLinkedClients($package_id) {
+
+        $collection = \App\assign::all();
+        $users = \App\User::all();
+        $coaches = \App\assignment::coach()->get()->unique('user_id');
+
         $package = package::find($package_id);
-        return response()->json(['clients' => $package->getClients(), 'coach' => $package->getCoach()]);
+
+        return  response()->json(['link_clints_exits'=>$coaches[0]->getClients($users,$collection), 'clients' => $package->getClients()]);
+        
+        return response()->json([
+             'clients' => $package->getClients(),
+             'coach' => $package->getCoach(),
+             'collection'=>$collection,
+             'users'=> $users,
+             'coaches'=>$coaches]);
     }
 
     /**

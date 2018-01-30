@@ -195,9 +195,16 @@ $(document).on('click', '.add_client', function(e) {
     var package_id = $(this).data('value');
     $('#package_id').val(package_id);
     $('#emails').val('');
+
+    $.get(pUrl + '/linked_clients/' + package_id, function(data) {
+        console.log(data);
+    });
+
     $('#addClientModal').modal('show');
 
 });
+
+
 $(document).on('click', '#btn-save-addclient1', function(e) {
 
     var $btn = $(this);
@@ -242,6 +249,9 @@ $(document).on('click', '#btn-save-addclient1', function(e) {
         }
     });
 });
+
+
+
 $(document).on('click', '.linked_client', function(e) {
     $('#linked_clients_list').html("");
     var package_id = $(this).val();

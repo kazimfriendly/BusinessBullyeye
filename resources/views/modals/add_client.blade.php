@@ -84,11 +84,9 @@
                             <!-- <input id="emails" type="text" class="form-control" name="emails" value="{{ old('email') }}" required> -->
 
                             <select id="package-assign-multidropdown" multiple="multiple" name="email">
-                            @foreach ($coaches as $coache)
-                                @foreach ($coache->getClients($users,$collection) as $client)
-                                    <option value="{{ $client->email }}">{{$client->email}}</option>
-                                @endforeach
-                            @endforeach
+                         
+                                    <option value=""></option>
+                    
                             </select>
 
 
