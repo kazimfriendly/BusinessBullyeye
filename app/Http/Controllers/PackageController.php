@@ -168,15 +168,24 @@ class PackageController extends Controller {
         $coaches = \App\assignment::coach()->get()->unique('user_id');
 
         $package = package::find($package_id);
+        $all_clints_coaches=[];
+            foreach ($coaches as $coache):
+                foreach ($coache->getClients($users,$collection) as $client):
+                    $all_clints_coaches[]=$client->id;
+                endforeach;
+            endforeach;
+//         array('all_clints_coaches');
+//       print_r( $package->getClients() );
+// dd();
 
-        return  response()->json(['link_clints_exits'=>$coaches[0]->getClients($users,$collection), 'clients' => $package->getClients()]);
+        // return  response()->json(['link_clints_exits'=>$coaches[0]->getClients($users,$collection)->id, 'clients' => $package->getClients()]);
         
         return response()->json([
              'clients' => $package->getClients(),
              'coach' => $package->getCoach(),
              'collection'=>$collection,
              'users'=> $users,
-             'coaches'=>$coaches]);
+             'all_clints_coaches'=>$all_clints_coaches]);
     }
 
     /**

@@ -85,8 +85,6 @@
 
                             <select id="package-assign-multidropdown" multiple="multiple" name="email">
                          
-                                    <option value=""></option>
-                    
                             </select>
 
 

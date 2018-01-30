@@ -194,10 +194,17 @@ $(document).on('click', '#btn-save-client1', function(e) {
 $(document).on('click', '.add_client', function(e) {
     var package_id = $(this).data('value');
     $('#package_id').val(package_id);
-    $('#emails').val('');
 
     $.get(pUrl + '/linked_clients/' + package_id, function(data) {
         console.log(data);
+        $.each(data.clients, function(index, client) {
+            $.each(data.all_clints_coaches, function(index, all_client) {
+                if (all_client === client.id) {
+                    console.log('true' + client.id + ' ' + all_client);
+                };
+            });
+
+        });
     });
 
     $('#addClientModal').modal('show');
@@ -259,6 +266,7 @@ $(document).on('click', '.linked_client', function(e) {
     $.get(pUrl + '/linked_clients/' + package_id, function(data) {
         console.log(data);
         $.each(data.clients, function(index, client) {
+
             //console.log(index + ": " + client.name + '<br/>');
             $('#linked_clients_list').append('<tr><td>' + client.name + ' </td><td>' + client.email + ' </td>' +
                 '<td> <form enctype="multipart/form-data" class="form-horizontal" role="form" method="POST"  id="deleteForm_' + client.id + '" action="' + app.base_url + '/clients/' + client.id + '">' +
