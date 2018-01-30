@@ -63,6 +63,7 @@
                                     <div id="comment_content_p">{!! $response->getContent($response->response_id) !!}</div>
                                     @if($response->user_id===Auth::id())
                                         <div class="comment-action">
+                                            <button data-show="false" id="{{$response->response_id}}" class="comment-cancel">cancel</button>
                                             <button data-state="edit" id="{{$response->response_id}}" class="comment-edit">edit</button>
                                         </div>
                                     @endif
@@ -522,16 +523,43 @@ function assign_update(e){
 /********************** END  ******************/
 /* div convert to textarea update answers ******/
 $("body").on("click",".comment-edit", function(){
+
+   
+
     var btn = jQuery(this),
         div = btn.parent().parent().find("#comment_content_p"),
         html,
         isEdit = btn.attr("data-state") === "edit",
         state  = isEdit ? "save" : "edit";
+       
+
     if (isEdit) {
+
+
+        jQuery('body [data-show="true"]').each(function(){
+        var btn = jQuery(this),
+        div = btn.parent().parent().find("#comment_content_p"),
+        clone = btn.parent().parent().find("#clone").html(),
+        html;
+
+        html = div.find("textarea").val().replace(/\n/gi,"<br>"); 
+        btn.parent().find('[data-show="false"]').hide();
+
+        div.html(clone);
+        btn.attr("data-show", 'false');
+        btn.attr("data-show","false").hide();
+        btn.parent().find("[data-state]").attr('data-state','edit').text('Edit');
+        });
+
+
         html = "<textarea class='form-control input-lg' rows=5 name='content'>" + div.html().replace(/<br>/gi,"\n") + "</textarea>";
+        btn.parent().parent().find('#clone').remove();
+        $( "<div style='display:none' id='clone'>"+ div.html() +"</div>" ).insertAfter( div );
+        btn.parent().find('[data-show="false"]').show().attr("data-show","true");
     } else {
         assign_update(btn);
-        html = div.find("textarea").val().replace(/\n/gi,"<br>");      
+        html = div.find("textarea").val().replace(/\n/gi,"<br>"); 
+        btn.parent().find('[data-show="true"]').attr("data-show","false").hide();
     }
     div.html(html);
     btn.attr("data-state", state).text(state);   
@@ -539,6 +567,23 @@ $("body").on("click",".comment-edit", function(){
 /********************** END  ******************/
 
 
+/**************** response cancel **************/
+$("body").on("click","[data-show='true']", function(){
+var btn = jQuery(this),
+div = btn.parent().parent().find("#comment_content_p"),
+clone = btn.parent().parent().find("#clone").html(),
+html;
+
+html = div.find("textarea").val().replace(/\n/gi,"<br>"); 
+btn.parent().find('[data-show="false"]').hide();
+
+div.html(clone);
+btn.attr("data-show", 'false');
+btn.attr("data-show","false").hide();
+btn.parent().find("[data-state]").attr('data-state','edit').text('Edit');
+
+});
+/********************** END  ******************/
 
 $(document).on('click', '#save-response', function (e) {
     var quid = $(this).val();
@@ -554,9 +599,11 @@ $(document).on('click', '#save-response', function (e) {
     });
     e.preventDefault();
     // console.log($("#responseBox_"+quid+" textarea").val().replace(/\r\n/gi,"</br>"));
-    // var content ={ content : $("#responseBox_"+quid+" textarea").val().replace(/\r\n/gi,"</br>")};
-    //  var content =$("#responseBox_"+quid+" textarea").val().replace(/\r\n/gi,"</br>");
-    // console.log($("#responseBox_" + quid).find('input,textarea').not('[name="content"]').serialize());
+    //  var content = {content:$("#responseBox_"+quid+" [name='content']").val().replace(/\n/gi,"</br>")};
+    // // alert(content);
+    // //  var content =$("#responseBox_"+quid+" textarea").val().replace(/\r\n/gi,"</br>");
+    // var form = $("#responseBox_" + quid).find('input,textarea').not('[name="content"]').serialize();
+    //alert(form+"&"+$.param(content) );
     $.ajax({
         type: "POST",
         url: $("#responseBox_" + quid).attr('action'),
@@ -581,6 +628,7 @@ $(document).on('click', '#save-response', function (e) {
                     + '</div>'
                     + '<div id="comment_content_p">' + data.response.content + '</div>  '
                     + '<div class="comment-action">'
+                    + '<button data-show="false" id="'+data.response.id+'" class="comment-cancel">cancel</button>'
                     + '<button data-state="edit" id="'+data.response.id+'" class="comment-edit">edit</button>'
                     + '</div>'
                     + '</div>'
@@ -716,17 +764,32 @@ $(document).on('click', '#save-response', function (e) {
         text-align: end;
     }
 
+    .post .post-footer .comments-list .comment .comment-action .comment-cancel,
     .post .post-footer .comments-list .comment .comment-action .comment-edit {
-        background: #5ad46e;
         color: #fff;
         padding: 5px 10px;
         border-radius: 5px;
         text-decoration:unset;
         text-transform: capitalize;
+        border: unset;
+        transition:all 0.3s ease-in
     }
-    .post .post-footer .comments-list .comment .comment-action .comment-edit:hover {
-        background: #4db45d;
+
+    .post .post-footer .comments-list .comment .comment-action .comment-edit{ 
+               background: rgba(85, 228, 59, 0.5);
     }
+
+    .post .post-footer .comments-list .comment .comment-action .comment-cancel{
+        display: none;
+            background: rgba(246, 0, 0, 0.5);
+     }
+     .post .post-footer .comments-list .comment .comment-action .comment-edit:hover{ 
+        background: rgba(85, 228, 59, 1);
+}
+
+.post .post-footer .comments-list .comment .comment-action .comment-cancel:hover{
+     background: rgba(246, 0, 0, 1);
+}
 
     .post .post-footer .comments-list .comment > .comments-list {
         margin-left: 50px;
