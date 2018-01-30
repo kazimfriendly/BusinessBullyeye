@@ -69,8 +69,8 @@ class ProfileController extends Controller {
 
         $msg ='';
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' =>'required|email|unique:users,email,'.$user_id,
+            'name' => '',
+            'email' =>'email|unique:users,email,'.$user_id,
         ]);
         if (!$validator->fails()) {
             $msg = "Password and Confirm Password should be same.";
