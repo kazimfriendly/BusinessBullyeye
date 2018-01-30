@@ -61,10 +61,11 @@
                                             {{$response->getTime($response->response_id)}}</h5>
                                     </div>
                                     <div id="comment_content_p">{!! $response->getContent($response->response_id) !!}</div>
-                                    <div class="comment-action">
-
-                                    <button data-state="edit" id="{{$response->response_id}}" class="comment-edit">edit</button>
-                                    </div>
+                                    @if($response->user_id===Auth::id())
+                                        <div class="comment-action">
+                                            <button data-state="edit" id="{{$response->response_id}}" class="comment-edit">edit</button>
+                                        </div>
+                                    @endif
                                 </div>
 
                             </li>
