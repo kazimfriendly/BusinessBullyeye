@@ -61,7 +61,7 @@
                                             {{$response->getTime($response->response_id)}}</h5>
                                     </div>
                                     <div id="comment_content_p">{!! $response->getContent($response->response_id) !!}</div>
-                                    @if($response->user_id===Auth::id())
+                                    @if($response->user_id==Auth::id())
                                         <div class="comment-action">
                                             <button data-show="false" id="{{$response->response_id}}" class="comment-cancel">cancel</button>
                                             <button data-state="edit" id="{{$response->response_id}}" class="comment-edit">edit</button>
