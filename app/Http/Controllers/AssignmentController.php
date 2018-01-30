@@ -39,7 +39,7 @@ class AssignmentController extends Controller {
      */
     public function store(Request $request, $package_id, $module_id) {
         $response = new \App\response();
-        $response->content = nl2br($request->content);
+        $response->content = trim(str_replace("\n","<br>",$request->content));
         $response->save();
 
         $discussion = new \App\discussion();
