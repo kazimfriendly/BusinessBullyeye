@@ -158,37 +158,16 @@ class PackageController extends Controller {
 
     public function showLinkedClients($package_id) {
 
-        $collection = \App\assign::all();
-        $users = \App\User::all();
+
         $coaches = \App\assignment::coach()->get()->unique('user_id');
 
         $package = package::find($package_id);
-        $all_clints_coaches=[];
-        foreach ($coaches as $coache):
-            foreach ($coache->getClients($users,$collection) as $key=>$value):
-                $all_clints_coaches[] = $value;
-            endforeach;
-        endforeach;
+       
 
-
-//         $data =  [];
-//     foreach(json_decode($package->getClients()) as $key => $value){
-//           $data[$key]=  $value;
-//           $data['link_id_packages']=  $all_clints_coaches;
-//     }
-//     print_r($data);
-// dd();
-
-
-
-        // return  response()->json(['link_clints_exits'=>$coaches[0]->getClients($users,$collection)->id, 'clients' => $package->getClients()]);
-        
         return response()->json([
              'clients' => $package->getClients(),
              'coach' => $package->getCoach(),
-             'collection'=>$collection,
-             'users'=> $users,
-             'all_clints_coaches'=>$all_clints_coaches]);
+             'all_clients_coach'=>$coaches[0]->getCoacheClients(Auth::id())]);
     }
 
     /**

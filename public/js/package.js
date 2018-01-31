@@ -196,7 +196,7 @@ $(document).on('click', '.add_client', function(e) {
     $('#package_id').val(package_id);
 
     $.get(pUrl + '/linked_clients/' + package_id, function(data) {
-        console.log(data.all_clints_coaches);
+        console.log(data.all_clients_coach);
         console.log(data.clients);
         var a = [];
         $.each(data.clients, function(index, client) {
@@ -205,7 +205,7 @@ $(document).on('click', '.add_client', function(e) {
         jQuery('ul.multiselect-container.dropdown-menu li.multiselect-item.multiselect-all~li').remove();
         jQuery('#package-assign-multidropdown').html('');
         jQuery('.selected_email ul').html('');
-        $.each(data.all_clints_coaches, function(index, link_client) {
+        $.each(data.all_clients_coach, function(index, link_client) {
 
             if (jQuery.inArray(link_client.id, a) !== -1) {
 

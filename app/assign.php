@@ -95,4 +95,22 @@ class assign extends Model {
                 ->where("user_id",$this->user_id)->first();
     }
 
+    public function get_coach_by_id($user_id){
+        return \App\assignment::where('user_id',$user_id)->get();
+    }
+
+
+    public function getCoacheClients($user_id){
+        $a=[];
+       foreach($this->get_coach_by_id($user_id) as $b){
+         $c = \App\assignment::where('coache_id',$b->id)->get();
+         foreach($c as $d){
+              $a[] = $d->user_id;
+         }
+       }
+       return  \App\user::find($a);
+    }
+
+   
+
 }

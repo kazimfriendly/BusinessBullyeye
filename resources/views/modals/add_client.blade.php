@@ -74,9 +74,6 @@
             </div>
             <form id="frmAddClient" name="frmAddClient" class="form-horizontal" >
                 <div class="modal-body">
-
-
-
                     <div class="form-group{{ $errors->has('emails') ? ' has-error' : '' }}">
                         <!-- <label for="email" class="col-md-4 control-label">E-Mail Addresses In Comma separated format</label> -->
 
@@ -91,10 +88,10 @@
                         <div class="col-md-6">
     
                                 <div class="selected_email">
-                                <h2>Already Assign Clients</h2>
-                               <ul>
-                                    <li></li>
-                               </ul>
+                                    <h3>Already Assigned Clients</h3>
+                                    <ul>
+                                            <li></li>
+                                    </ul>
                                 </div>
 
                             </div>
