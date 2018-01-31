@@ -103,10 +103,11 @@ class ClientController extends Controller {
     public function storeExisting(Request $request) {
 
         $pack_id = $request->package_id;
-        $emails = $request->emails;
+        $emails  = $request->emails;
         // $emails = preg_replace('/\s+/', '', $emails);
-        $users = \App\User::whereIn('email', array_values($emails))->get();
+        $users = \App\User::whereIn('email', $emails)->get();
         $package = \App\package::find($request->package_id);
+
 
         $clients = [];
         if($users->count() <1)
@@ -117,7 +118,7 @@ class ClientController extends Controller {
             if (\App\assignment::where('user_id', $user->id)->where('package_id', $request->package_id)->count() < 1) {
                 $assign = new \App\assign();
                 $assign->client($user->id, $request->package_id);
-                \Mail::to($user->email)->send(new NewClientAdded($user, $package));
+               // \Mail::to($user->email)->send(new NewClientAdded($user, $package));
                 $clients[] = $user->email;
             } else {
                 abort(500, 'User Already Exist.');
