@@ -162,12 +162,12 @@ class PackageController extends Controller {
         $coaches = \App\assignment::coach()->get()->unique('user_id');
 
         $package = package::find($package_id);
-       
+       // print_r($package->getCoach()->id); dd();
 
         return response()->json([
              'clients' => $package->getClients(),
              'coach' => $package->getCoach(),
-             'all_clients_coach'=>$coaches[0]->getCoacheClients(Auth::id())]);
+             'all_clients_coach'=>$coaches[0]->getCoacheClients($package->getCoach()->id)]);
     }
 
     /**
