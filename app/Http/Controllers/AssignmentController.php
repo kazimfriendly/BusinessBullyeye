@@ -39,7 +39,7 @@ class AssignmentController extends Controller {
      */
     public function store(Request $request, $package_id, $module_id) {
         $response = new \App\response();
-        $response->content = trim(str_replace("\n","<br>",$request->content));
+        $response->content = trim($request->content);//trim(str_replace("\n","<br>",$request->content));
         $response->save();
 
         $discussion = new \App\discussion();
@@ -185,7 +185,7 @@ class AssignmentController extends Controller {
 
     public function update($id,Request $request){
         $response =  Response::find($id);
-        $response->content = nl2br($request->content);
+        $response->content = trim($request->content);//trim(str_replace("\n","<br>",$request->content)); //nl2br($request->content);
 
         if($response->save()){
             $data=['status'=>true];
