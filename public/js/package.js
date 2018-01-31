@@ -196,19 +196,30 @@ $(document).on('click', '.add_client', function(e) {
     $('#package_id').val(package_id);
 
     $.get(pUrl + '/linked_clients/' + package_id, function(data) {
-        console.log(data);
+        console.log(data.all_clints_coaches);
+        console.log(data.clients);
+        var a = [];
         $.each(data.clients, function(index, client) {
-            $.each(data.all_clints_coaches, function(index, all_client) {
-                if (all_client === client.id) {
-                    console.log('true' + client.id + ' ' + all_client);
-                };
-            });
+            a[index] = client.id;
+        });
+        jQuery('ul.multiselect-container.dropdown-menu li.multiselect-item.multiselect-all~li').remove();
+        jQuery('#package-assign-multidropdown').html('');
+        jQuery('.selected_email ul').html('');
+        $.each(data.all_clints_coaches, function(index, link_client) {
+
+            if (jQuery.inArray(link_client.id, a) !== -1) {
+
+                jQuery('.selected_email ul').append('<li>' + link_client.email + '</li>');
+            } else {
+                jQuery('#package-assign-multidropdown').append('<option value="' + link_client.email + '">' + link_client.email + '</option>');
+                jQuery('ul.multiselect-container.dropdown-menu').append('<li><a tabindex="' + index + '"><label class="checkbox"><input type="checkbox" value="' + link_client.email + '"> ' + link_client.email + ' </label></a></li>');
+
+            }
 
         });
+
     });
-
     $('#addClientModal').modal('show');
-
 });
 
 

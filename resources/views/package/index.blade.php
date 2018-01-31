@@ -132,4 +132,18 @@ select#package-assign-multidropdown + div .dropdown-menu>li>a{
     display: table;
     width: 100%;
 }
+
+.selected_email ul {
+    min-height: 230px;
+    box-shadow: 0 0 1px 1px rgba(0,0,0,.5);
+    width: 300px;
+    overflow: auto;
+    padding: 10px;
+    list-style: none;
+    font-size: 15px;
+}
+
+.selected_email h2 {
+    margin-top: 0;
+}
 </style>

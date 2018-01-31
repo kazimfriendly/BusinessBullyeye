@@ -33,13 +33,8 @@ class PackageController extends Controller {
         //     }
         // }
    
-        
-
-
-        
-
         return view('package.index')->with('packages', $packages)->with('epackage', $epackage)
-                        ->with('live_modules', $live_modules);
+                       ->with('live_modules', $live_modules);
     }
 
     /**
@@ -169,14 +164,22 @@ class PackageController extends Controller {
 
         $package = package::find($package_id);
         $all_clints_coaches=[];
-            foreach ($coaches as $coache):
-                foreach ($coache->getClients($users,$collection) as $client):
-                    $all_clints_coaches[]=$client->id;
-                endforeach;
+        foreach ($coaches as $coache):
+            foreach ($coache->getClients($users,$collection) as $key=>$value):
+                $all_clints_coaches[] = $value;
             endforeach;
-//         array('all_clints_coaches');
-//       print_r( $package->getClients() );
+        endforeach;
+
+
+//         $data =  [];
+//     foreach(json_decode($package->getClients()) as $key => $value){
+//           $data[$key]=  $value;
+//           $data['link_id_packages']=  $all_clints_coaches;
+//     }
+//     print_r($data);
 // dd();
+
+
 
         // return  response()->json(['link_clints_exits'=>$coaches[0]->getClients($users,$collection)->id, 'clients' => $package->getClients()]);
         

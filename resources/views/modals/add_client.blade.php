@@ -80,15 +80,24 @@
                     <div class="form-group{{ $errors->has('emails') ? ' has-error' : '' }}">
                         <!-- <label for="email" class="col-md-4 control-label">E-Mail Addresses In Comma separated format</label> -->
 
-                        <div class="col-md-offset-3 col-md-6">
+                        <div class="col-md-6">
                             <!-- <input id="emails" type="text" class="form-control" name="emails" value="{{ old('email') }}" required> -->
 
                             <select id="package-assign-multidropdown" multiple="multiple" name="email">
-                         
+                                    <option value="a">a</opttion>
                             </select>
-
-
+ 
                         </div>
+                        <div class="col-md-6">
+    
+                                <div class="selected_email">
+                                <h2>Already Assign Clients</h2>
+                               <ul>
+                                    <li></li>
+                               </ul>
+                                </div>
+
+                            </div>
                     </div>
 
                    
