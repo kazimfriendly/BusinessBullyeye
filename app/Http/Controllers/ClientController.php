@@ -118,7 +118,7 @@ class ClientController extends Controller {
             if (\App\assignment::where('user_id', $user->id)->where('package_id', $request->package_id)->count() < 1) {
                 $assign = new \App\assign();
                 $assign->client($user->id, $request->package_id);
-               // \Mail::to($user->email)->send(new NewClientAdded($user, $package));
+                \Mail::to($user->email)->send(new NewClientAdded($user, $package));
                 $clients[] = $user->email;
             } else {
                 abort(500, 'User Already Exist.');

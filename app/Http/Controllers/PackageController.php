@@ -162,7 +162,7 @@ class PackageController extends Controller {
         $coaches = \App\assignment::coach()->get()->unique('user_id');
 
         $package = package::find($package_id);
-    
+
 
         return response()->json([
              'clients' => $package->getClients(),

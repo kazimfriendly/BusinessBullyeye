@@ -60,7 +60,7 @@
 
                                             {{$response->getTime($response->response_id)}}</h5>
                                     </div>
-                                    <div id="comment_content_p">{!! $response->getContent($response->response_id) !!}</div>
+                                    <div id="comment_content_p"><pre>{!! $response->getContent($response->response_id) !!}</pre></div>
                                     @if($response->user_id==Auth::id())
                                         <div class="comment-action">
                                             <button data-show="false" id="{{$response->response_id}}" class="comment-cancel">cancel</button>
@@ -527,7 +527,7 @@ $("body").on("click",".comment-edit", function(){
    
 
     var btn = jQuery(this),
-        div = btn.parent().parent().find("#comment_content_p"),
+        div = btn.parent().parent().find("#comment_content_p pre"),
         html,
         isEdit = btn.attr("data-state") === "edit",
         state  = isEdit ? "save" : "edit";
@@ -538,11 +538,12 @@ $("body").on("click",".comment-edit", function(){
 
         jQuery('body [data-show="true"]').each(function(){
         var btn = jQuery(this),
-        div = btn.parent().parent().find("#comment_content_p"),
+        org_div = btn.parent().parent().find("#comment_content_p"),
+        div = btn.parent().parent().find("#comment_content_p pre"),
         clone = btn.parent().parent().find("#clone").html(),
         html;
 
-        html = div.find("textarea").val().replace(/\n/gi,"<br>"); 
+        html = org_div; //div.find("textarea").val();//.replace(/\n/gi,"<br>"); 
         btn.parent().find('[data-show="false"]').hide();
 
         div.html(clone);
@@ -552,13 +553,13 @@ $("body").on("click",".comment-edit", function(){
         });
 
 
-        html = "<textarea class='form-control input-lg' rows=5 name='content'>" + div.html().replace(/<br>/gi,"\n") + "</textarea>";
+        html = "<textarea class='form-control input-lg' rows=5 name='content'>" + div.html() + "</textarea>";
         btn.parent().parent().find('#clone').remove();
         $( "<div style='display:none' id='clone'>"+ div.html() +"</div>" ).insertAfter( div );
         btn.parent().find('[data-show="false"]').show().attr("data-show","true");
     } else {
         assign_update(btn);
-        html = div.find("textarea").val().replace(/\n/gi,"<br>"); 
+        html = div.find("textarea").val(); //.replace(/\n/gi,"<br>"); 
         btn.parent().find('[data-show="true"]').attr("data-show","false").hide();
     }
     div.html(html);
@@ -570,11 +571,12 @@ $("body").on("click",".comment-edit", function(){
 /**************** response cancel **************/
 $("body").on("click","[data-show='true']", function(){
 var btn = jQuery(this),
-div = btn.parent().parent().find("#comment_content_p"),
+org_div = btn.parent().parent().find("#comment_content_p"),
+div = btn.parent().parent().find("#comment_content_p pre"),
 clone = btn.parent().parent().find("#clone").html(),
 html;
 
-html = div.find("textarea").val().replace(/\n/gi,"<br>"); 
+html = org_div; //div.find("textarea").val(); //.replace(/\n/gi,"<br>"); 
 btn.parent().find('[data-show="false"]').hide();
 
 div.html(clone);
@@ -626,7 +628,7 @@ $(document).on('click', '#save-response', function (e) {
                     + '<h4 class="user">' + data.user.name + '</h4>'
                     + '<h5 class="time"> ' + data.response.created_at + '</h5>'
                     + '</div>'
-                    + '<div id="comment_content_p">' + data.response.content + '</div>  '
+                    + '<div id="comment_content_p"><pre>' + data.response.content + '</pre></div>  '
                     + '<div class="comment-action">'
                     + '<button data-show="false" id="'+data.response.id+'" class="comment-cancel">cancel</button>'
                     + '<button data-state="edit" id="'+data.response.id+'" class="comment-edit">edit</button>'
@@ -803,5 +805,19 @@ $(document).on('click', '#save-response', function (e) {
         margin-bottom: 10px;
         resize: none;
     }
+pre {
+    display: block;
+    padding: 0px !important;
+    margin: 0px !important;
+    font-size: 13px !important;
+    line-height: 1.6;
+    word-break: break-all;
+    word-wrap: break-word;
+    color: #333 !important;
+    background-color: #FFFFFF !important;
+    border: 0px !important;
+    border-radius: 0px !important;
+    font-family: arial !important;
+}
 </style>
 @endsection
