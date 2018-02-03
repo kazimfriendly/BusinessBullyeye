@@ -218,6 +218,12 @@ $(document).on('click', '.add_client', function(e) {
 
         });
 
+        if (data.all_clients_coach.length === 0) {
+            $.each(data.clients, function(index, client) {
+                jQuery('.selected_email ul').append('<li>' + client.email + '</li>');
+            });
+        }
+
     });
     $('#addClientModal').modal('show');
 });
