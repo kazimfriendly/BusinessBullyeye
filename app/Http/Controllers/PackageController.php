@@ -163,7 +163,8 @@ class PackageController extends Controller {
 
         $package = package::find($package_id);
 
-
+// print_r($package->getClients()->count());
+// dd();
         return response()->json([
              'clients' => $package->getClients(),
              'coach' => $package->getCoach(),
