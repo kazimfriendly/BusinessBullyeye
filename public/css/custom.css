@@ -197,6 +197,13 @@ td.ques_content {
 .doc_name .req{
     color: red;
 }
+#package-list tr td:first-child {
+    width: 400px;
+}
+.dropdownMenu1 i.fa-caret-up {
+    margin-left: 4px;
+    margin-right: -4px;
+}
 
 @media (min-width: 768px){
     body {

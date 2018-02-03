@@ -41,8 +41,7 @@
                                 </form></td>
                             <td>
                                 <div class="dropup">
-                                    <button class="btn btn-danger btn-detail dropdown-toggle pull-left dropdownMenu1" value="{{$package->id}}"  type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="Add Client"><i class="fa fa-user" ></i>
-                                        <span class="caret"></span>
+                                    <button class="btn btn-danger btn-detail dropdown-toggle pull-left dropdownMenu1" value="{{$package->id}}"  type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="Add Client"><i class="fa fa-user"></i><i class="fa fa-caret-up"></i>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                         <li ><a class="add_client" data-value="{{$package->id}}" href="#">Add Existing Client</a></li>
