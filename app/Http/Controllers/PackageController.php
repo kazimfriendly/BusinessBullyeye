@@ -20,7 +20,7 @@ class PackageController extends Controller {
         $packages = package::owner()->active()->get();
         $epackage = new package();
         $live_modules = module::where('is_live', true)->author()->get();
-
+        //$allcoaches = $epackage->getAllCoaches(32);
         //$assigns = \App\assign::where('user_id',Auth::id())->distinct()->get();
         // foreach($assigns as $assign){
         //     $clients = \App\assign::where('coache_id',$assign->id)->distinct()->get();
@@ -33,8 +33,11 @@ class PackageController extends Controller {
         //     }
         // }
    
+        // return view('package.index')->with('packages', $packages)->with('epackage', $epackage)
+        //                ->with('live_modules', $live_modules)->with('allcoaches', $allcoaches);
+
         return view('package.index')->with('packages', $packages)->with('epackage', $epackage)
-                       ->with('live_modules', $live_modules);
+        ->with('live_modules', $live_modules);
     }
 
     /**

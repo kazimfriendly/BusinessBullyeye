@@ -384,3 +384,8 @@ $(document).on('click', '.assign_coach22', function(e) {
     $('#assigncoachmodal').modal('show');
 
 });
+
+
+$(document).ready(function() {
+    $("a.disabled").removeAttr("href");
+});

@@ -70,6 +70,12 @@ class package extends Model {
 
 //        return "yes";
     }
+    //<= C4pt4inm =>
+    public static function getAllCoaches($given_package_id) {
+        $clientsId = \App\assignment::where("package_id", $given_package_id)->where("role_id", \App\role::coache())->pluck("user_id");
+        $coach = \App\User::whereIn("id", $clientsId)->get();
+        return $coach;
+    } //<= C4pt4inm =>
 
     public function scopeOwner($query) {
 

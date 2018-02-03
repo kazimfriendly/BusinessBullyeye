@@ -3,6 +3,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="">
     <div class="row">
         <div class="col-md-12 ">
@@ -34,22 +35,34 @@
                         
                                 @php
                                     $checked = ($package->status == 1)? 'checked':'';
+                                    $allcoaches = App\package::getAllCoaches($package->id);
+                                   
                                 @endphp
                                 <form enctype='multipart/form-data' class="form-inline" role="form" method="POST" style="display: inline;"  id="statusPackage_{{$package->id}}" action="{{ url('packages/status/'.$package->id) }}">
                                     {{ csrf_field() }}
                                     <input type="checkbox" id="status_package_{{$package->id}}" name="status" {{$checked}} >Off Client Reply 
                                 </form></td>
                             <td>
-                                <div class="dropup">
-                                    <button class="btn btn-danger btn-detail dropdown-toggle pull-left dropdownMenu1" value="{{$package->id}}"  type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="Add Client"><i class="fa fa-user" ></i>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li ><a class="add_client" data-value="{{$package->id}}" href="#">Add Existing Client</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a class="new_client" data-value="{{$package->id}}" href="#">Add New Client</a></li>
-                                    </ul>
-                                </div>&nbsp;
+                                @php $not_admin_pkj = "disabled"; @endphp
+                                @foreach( $allcoaches as $thiscoach)
+                                @if ($thiscoach['attributes']['status'] == 1 && ($thiscoach['attributes']['id'] == Auth::user()->id)) 
+                                @php $not_admin_pkj = "new_client";  break;@endphp
+                                @else
+                                @php $not_admin_pkj = "disabled"; @endphp
+                                @endif
+                                @endforeach  
+                                <div class="dropup ">
+                                        <button class="btn btn-danger btn-detail dropdown-toggle pull-left dropdownMenu1 " value="{{$package->id}}"  type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="Add Client"><i class="fa fa-user" ></i>
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                          
+                                            <li ><a class="add_client " data-value="{{$package->id}}" href="#">Add Existing Client</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a class="{{$not_admin_pkj}}" data-value="{{$package->id}}" href="#">Add New Client</a></li>
+                                        </ul>
+                                    </div>&nbsp;
+                                  
                                 @can('assignCoach', $package)
                                 <a href="{{url("/packages/assign_coach/".$package->id)}}" class="btn btn-success btn-detail assign_coach" value="{{$package->id}}" title="Assign Coach"><i class="fa fa-user-md" ></i></a>
                                 @endcan

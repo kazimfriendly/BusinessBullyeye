@@ -14,3 +14,8 @@
    width:80% !important;
 /*   margin-left: -35%; */
 }
+
+li a.disabled, li a.disabled:hover {
+    color: #ccc !important;
+    cursor: default;
+}
