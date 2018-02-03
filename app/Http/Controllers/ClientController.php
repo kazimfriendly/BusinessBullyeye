@@ -69,10 +69,10 @@ class ClientController extends Controller {
 //            $pack = $assign->getPackage($request->package_id);
 //            $coache = $assign->getCoache($request->package_id);
 
-echo Auth::id();
+//echo Auth::id();
 
-dd();
-         echo $assign->client($user->id, $pack_id);
+//dd();
+          $assign->client($user->id, $pack_id);
 //        $client->role_id = $clientRole;
 //        $client->user_id = $user->id;
 //        $client->package_id = $request->package_id;

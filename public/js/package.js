@@ -196,20 +196,23 @@ $(document).on('click', '.add_client', function(e) {
     $('#package_id').val(package_id);
 
     $.get(pUrl + '/linked_clients/' + package_id, function(data) {
-        console.log(data.all_clients_coach);
-        console.log(data.clients);
+        //console.log(data.all_clients_coach);
+        //console.log(data.clients);
         var a = [];
+        var b = []
         $.each(data.clients, function(index, client) {
             a[index] = client.id;
         });
         jQuery('ul.multiselect-container.dropdown-menu li.multiselect-item.multiselect-all~li').remove();
         jQuery('#package-assign-multidropdown').html('');
         jQuery('.selected_email ul').html('');
+        
         $.each(data.all_clients_coach, function(index, link_client) {
 
             if (jQuery.inArray(link_client.id, a) !== -1) {
 
                 jQuery('.selected_email ul').append('<li>' + link_client.email + '</li>');
+                b[index] = link_client.id;
             } else {
                 jQuery('#package-assign-multidropdown').append('<option value="' + link_client.email + '">' + link_client.email + '</option>');
                 jQuery('ul.multiselect-container.dropdown-menu').append('<li><a tabindex="' + index + '"><label class="checkbox"><input type="checkbox" value="' + link_client.email + '"> ' + link_client.email + ' </label></a></li>');
@@ -223,6 +226,19 @@ $(document).on('click', '.add_client', function(e) {
                 jQuery('.selected_email ul').append('<li>' + client.email + '</li>');
             });
         }
+        
+        $.each(data.clients, function(index, link_client) {
+            if (jQuery.inArray(link_client.id, b) !== -1) {
+            } else {
+                jQuery('.selected_email ul').append('<li>' + link_client.email + '</li>');
+            }
+            //if (data.all_clients_coach.length < data.clients.length) {
+                    //$.each(data.clients, function(index, client) {
+                        //jQuery('.selected_email ul').append('<li>' + client.email + '</li>');
+                    //});
+                //}
+            //}
+        });
 
     });
     $('#addClientModal').modal('show');
