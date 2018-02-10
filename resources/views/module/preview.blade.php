@@ -128,7 +128,7 @@
                                 <?php
                                     $fileName = $document->filename;
                                     $substring = "_";
-                                    if(strrpos($fileName,$substring) !== -1){ // Get the last instace of underscore
+                                    if(strrpos($fileName,$substring)){ // Get the last instace of underscore
                                         $str = $document->filename;
                                         $index = strrpos($fileName,$substring);
                                         $fileName = substr($str,0,$index).substr($fileName,strrpos($fileName,"."));
@@ -170,7 +170,7 @@
                                 <?php
                                     $fileName = $document->filename;
                                     $substring = "_";
-                                    if(strrpos($fileName,$substring) !== -1){ // Get the last instace of underscore
+                                    if(strrpos($fileName,$substring)){ // Get the last instace of underscore
                                         $str = $document->filename;
                                         $index = strrpos($fileName,$substring);
                                         $fileName = substr($str,0,$index).substr($fileName,strrpos($fileName,"."));
@@ -818,6 +818,9 @@ pre {
     border: 0px !important;
     border-radius: 0px !important;
     font-family: arial !important;
+    display: flex;
+    white-space: normal;
+    word-break: break-word;
 }
 </style>
 @endsection
