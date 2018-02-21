@@ -33,7 +33,7 @@ class NewClientAdded extends Mailable
     public function build()
     {
         return $this->view('emails.new_client_added')
-                ->from("admin@business-bullseye.com", "Business BullsEye Admin")
+                ->from("no-reply@business-bullseye.com", "Business BullsEye Admin")
                 ->subject("Business BullsEye - You are assigned to a New Package")
                 ->with('user',  $this->user)
                 ->with('package',  $this->package);

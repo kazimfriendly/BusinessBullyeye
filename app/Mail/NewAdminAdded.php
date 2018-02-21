@@ -30,7 +30,7 @@ class NewAdminAdded extends Mailable
     public function build()
     {
         return $this->view('emails.new_admin_added')
-                ->from("admin@business-bullseye.com", "Business BullsEye Admin")
+                ->from("no-reply@business-bullseye.com", "Business BullsEye Admin")
                 ->subject("Business BullsEye - You are added as Super Admin")
                 ->with('user',  $this->user);
     }

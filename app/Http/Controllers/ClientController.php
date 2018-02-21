@@ -61,7 +61,7 @@ class ClientController extends Controller {
 //            if (\App\User::where('email', '=', $request->email)->count() < 1) {
             event(new Registered($user = $this->create($request->all())));
 //            }
-            //\Mail::to($user->email)->send(new NewClientAdded($user, $package));
+            \Mail::to($user->email)->send(new NewClientAdded($user, $package));
 //        $clientRole = \App\role::client();
             $assign = new \App\assign();
 //        $client = $assign->client($user->id, $request->package_id);

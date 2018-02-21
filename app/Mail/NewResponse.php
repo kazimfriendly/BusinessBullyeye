@@ -46,7 +46,7 @@ class NewResponse extends Mailable {
         
         
         return $this->view('emails.'.  $this->cview)
-                ->from("admin@business-bullseye.com", "Business BullsEye Admin")
+                ->from("no-reply@business-bullseye.com", "Business BullsEye Admin")
                 ->subject("Business BullsEye - New response by your ".  $this->role)
                 ->with('user',  $this->user)
                 ->with('moduleUrl',  url('assigned/'.$this->assignment->id))

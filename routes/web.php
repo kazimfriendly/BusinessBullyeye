@@ -105,3 +105,24 @@ Route::group(['prefix' => 'profile','middleware' => 'auth'], function () {
     Route::delete('{user_id}','ProfileController@destroy');
     Route::get('/linked_clients/{user_id}','ProfileController@showLinkedClients');
 });
+
+
+/*Route::get('/checking/mail', function(){
+     $data["mail_message"] = "Hello!";
+     Mail::send([], [], function ($message) {
+         $message
+             ->to('kazim03031990@gmail.com')
+             ->from('no-reply@business-bullseye.com')
+             ->subject('TEST')
+             ->setBody('<h1>Hi, welcome user!</h1>', 'text/html'); // for HTML rich messages
+       });
+    
+         //$msg = "First line of text\nSecond line of text";
+    
+         // use wordwrap() if lines are longer than 70 characters
+         //$msg = wordwrap($msg,70);
+    
+         // send email
+         //mail("eagleeye110@gmail.com","My subject",$msg);
+    echo phpinfo();
+});*/
