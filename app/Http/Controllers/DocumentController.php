@@ -57,8 +57,13 @@ class DocumentController extends Controller {
         return response()->json($doc);
     }
 
-    public function listModuleDoc($module_id) {
+    /*public function listModuleDoc($module_id) {
         $documents = module::find($module_id)->documents()->get();
+        return response()->json($documents);
+    }*/
+
+    public function listModuleDocCoach($module_id) {
+        $documents = module::find($module_id)->documents()->where('uploaded_by',\Auth::user()->id)->get();
         return response()->json($documents);
     }
 

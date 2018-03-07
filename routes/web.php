@@ -36,7 +36,8 @@ Route::post('modules/make_copy/{module_id}','ModuleController@makeCopy')->middle
 
 
 Route::post('/documents/upload', 'DocumentController@docUploadPost')->middleware('auth');
-Route::get('/documents/list/{module_id?}', 'DocumentController@listModuleDoc')->middleware('auth');
+//Route::get('/documents/list/{module_id?}', 'DocumentController@listModuleDoc')->middleware('auth');
+Route::get('/documents/list/{module_id?}', 'DocumentController@listModuleDocCoach')->middleware('auth');
 Route::delete('/documents/{doc_id?}', 'DocumentController@destroy')->middleware('auth');
 
 
