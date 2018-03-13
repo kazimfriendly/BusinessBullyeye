@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Auth\Events\Registered;
 use App\User;
 use App\Mail\NewClientAdded;
+use App\Mail\AdminMailNewClient;
 
 class ClientController extends Controller {
 
@@ -62,6 +63,7 @@ class ClientController extends Controller {
             event(new Registered($user = $this->create($request->all())));
 //            }
             \Mail::to($user->email)->send(new NewClientAdded($user, $package));
+            \Mail::to("anthony@straightforwardsuccess.com")->cc("julie@straightforwardsuccess.com")->send(new AdminMailNewClient($user, $package));
 //        $clientRole = \App\role::client();
             $assign = new \App\assign();
 //        $client = $assign->client($user->id, $request->package_id);
