@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <label for="inputDetail" class="col-sm-3 control-label">Price</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control has-error" id="price" name="price" placeholder="0.00" value="{{$package->price}}">
+                            <input type="number" step="any" class="form-control has-error" id="price" name="price" placeholder="0" value="{{$package->price}}">
                         </div>
                     </div>
 
